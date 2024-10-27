@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/secured")
-    @RolesAllowed("ROLE_offline_access")
+    @RolesAllowed("ROLE_user")
     public String getSecured() {
         return "This is secured";
     }

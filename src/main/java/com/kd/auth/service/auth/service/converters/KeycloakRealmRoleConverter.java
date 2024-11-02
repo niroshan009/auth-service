@@ -16,11 +16,11 @@ public class KeycloakRealmRoleConverter implements Converter<Jwt, Collection<Gra
     @Override
     public Collection<GrantedAuthority> convert(Jwt jwt) {
         Map<String, Object> resourceAccess = jwt.getClaimAsMap("resource_access");
-        if (resourceAccess == null || !resourceAccess.containsKey("login-app")) {
+        if (resourceAccess == null || !resourceAccess.containsKey("auth-client")) {
             return Collections.emptyList();
         }
 
-        Map<String, Object> loginApp = (Map<String, Object>) resourceAccess.get("login-app");
+        Map<String, Object> loginApp = (Map<String, Object>) resourceAccess.get("auth-client");
         List<String> roles = (List<String>) loginApp.getOrDefault("roles", Collections.emptyList());
 
         return roles.stream()
